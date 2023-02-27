@@ -1,11 +1,11 @@
 export type videosTypes =
     {
         id:	number,
-        title:	string,
-        author:	string,
+        title: string,
+        author: string,
         canBeDownloaded: boolean,
         minAgeRestriction: number,
-        createdAt:	string,
+        createdAt: string,
         publicationDate: string,
         availableResolutions: string,
     };
