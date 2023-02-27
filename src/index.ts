@@ -58,7 +58,7 @@ app.put('/:id', (req: Request, res: Response) =>
     }
 })
 //delete all
-app.delete('/', (req: Request, res: Response) =>
+app.delete('/testing/all-data', (req: Request, res: Response) =>
 {
    res.send(vidosDB)
 })
