@@ -60,7 +60,7 @@ app.put('/:id', (req: Request, res: Response) =>
 //delete all
 app.delete('/testing/all-data', (req: Request, res: Response) =>
 {
-   res.send(vidosDB)
+   res.status(204).send(vidosDB)
 })
 //delete by ID
 app.delete('/:id', (req: Request, res: Response) =>
