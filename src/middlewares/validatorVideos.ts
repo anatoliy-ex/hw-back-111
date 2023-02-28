@@ -56,7 +56,9 @@ export const createVideosValidator =
 
 export const updateVideosValidator =
     [
-        ...createVideosValidator,
+        titleValidation,
+        body('author').isString().isLength({max: 20}),
+        availableResolutionsValidation,
         minAgeRestrictionValidation,
         canBeDownloadedValidation,
         inputValidationMiddleware
