@@ -16,7 +16,6 @@ const port = process.env.PORT || 666
 app.use(express.json());
 
 
-export const videosResolutions = ["P144", "P240", "P360", "P480", "P720", "P1080"];
 //get all
 app.get('/videos', (req: Request, res: Response) => {
     res.send(vidosDB);
