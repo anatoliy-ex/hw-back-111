@@ -7,8 +7,7 @@ export const videosValidator =
         body('title').isString().trim().isLength({ min: 0, max: 40}),
         body('author').isString().isLength({max: 20}),
         body('availableResolutions').isArray(),
-        body('minAgeRestriction').toInt().custom((value, { req }) =>
-        {return 18 > req.body.availableResolutions && req.body.availableResolutions > 1;}),
+        body('minAgeRestriction').toInt(),
         body('canBeDownloaded').optional().isBoolean(),
     ];
 
