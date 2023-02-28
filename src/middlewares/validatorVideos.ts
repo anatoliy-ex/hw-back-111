@@ -1,7 +1,7 @@
 import {NextFunction, Request, Response} from 'express';
 import {body, validationResult} from 'express-validator';
 
-export const videosResolutions = ["P144", "P240", "P360", "P480", "P720", "P1080"];
+export const videosResolutions = ["P144", "P240", "P360", "P480", "P720", "P1080", "P1440", "P2160"];
 
 
 const titleValidation = body('title').isString().trim().notEmpty().isLength({min: 1, max: 40})
