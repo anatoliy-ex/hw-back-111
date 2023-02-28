@@ -1,4 +1,3 @@
-import {videosResolutions} from "../index";
 type AvailableResolutions = string[];
 export type videosTypes =
     {
