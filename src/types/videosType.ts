@@ -7,5 +7,5 @@ export type videosTypes =
         minAgeRestriction: number,
         createdAt: string,
         publicationDate: string,
-        availableResolutions: string,
+        availableResolutions: string | "P144",
     };
