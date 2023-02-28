@@ -82,7 +82,7 @@ app.delete('/testing/all-data', (req: Request, res: Response) =>
     res.sendStatus(204);
 })
 //delete by ID
-app.delete('videos/:id', (req: Request, res: Response) =>
+app.delete('/videos/:id', (req: Request, res: Response) =>
 {
     for(let i = 0; i < vidosDB.length; i++)
     {
