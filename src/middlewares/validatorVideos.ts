@@ -9,7 +9,8 @@ export const videosValidator =
         body('availableResolutions').isArray(),
         body('minAgeRestriction').toInt().custom(val =>
         {
-            return val.toInt() >= 1 && val.toInt() <= 18;
+            val.toInt
+            return val >= 1 && val <= 18;
         }),
     ];
 
