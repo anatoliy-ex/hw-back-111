@@ -14,11 +14,11 @@ app.use(express.json());
 
 export const videosResolutions = [ "P144", "P240", "P360", "P480", "P720", "P1080"];
 //get all
-app.get('/', (req: Request, res: Response) => {
+app.get('/videos', (req: Request, res: Response) => {
     res.send(vidosDB);
 })
 //get by ID
-app.get('/:id', (req: Request, res: Response) =>
+app.get('/videos/:id', (req: Request, res: Response) =>
 {
     let videos = vidosDB.find(v => v.id === +req.params.id);
 
@@ -32,7 +32,7 @@ app.get('/:id', (req: Request, res: Response) =>
     }
 })
 //post video
-app.post('/', videosValidator, inputValidationMiddleware, (req: Request, res: Response) =>
+app.post('/videos', videosValidator, inputValidationMiddleware, (req: Request, res: Response) =>
 {
     let newVideos : videosTypes= {
         id : + (new Date()),
@@ -48,7 +48,7 @@ app.post('/', videosValidator, inputValidationMiddleware, (req: Request, res: Re
     res.status(201).send(newVideos);
 })
 //update videos
-app.put('/:id', videosValidator, inputValidationMiddleware, (req: Request, res: Response) =>
+app.put('/videos/:id', videosValidator, inputValidationMiddleware, (req: Request, res: Response) =>
 {
     let isUpdated = vidosDB.find(v => v.id === +req.params.id);
 
@@ -74,7 +74,7 @@ app.delete('/testing/all-data', (req: Request, res: Response) =>
     res.sendStatus(204);
 })
 //delete by ID
-app.delete('/:id', (req: Request, res: Response) =>
+app.delete('videos/:id', (req: Request, res: Response) =>
 {
     for(let i = 0; i < vidosDB.length; i++)
     {

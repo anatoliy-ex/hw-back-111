@@ -15,11 +15,11 @@ app.use(parserMiddleware);
 app.use(express.json());
 exports.videosResolutions = ["P144", "P240", "P360", "P480", "P720", "P1080"];
 //get all
-app.get('/', (req, res) => {
+app.get('/videos', (req, res) => {
     res.send(db_1.vidosDB);
 });
 //get by ID
-app.get('/:id', (req, res) => {
+app.get('/videos/:id', (req, res) => {
     let videos = db_1.vidosDB.find(v => v.id === +req.params.id);
     if (videos) {
         res.status(200).send(videos);
@@ -29,7 +29,7 @@ app.get('/:id', (req, res) => {
     }
 });
 //post video
-app.post('/', validatorVideos_1.videosValidator, validatorVideos_1.inputValidationMiddleware, (req, res) => {
+app.post('/videos', validatorVideos_1.videosValidator, validatorVideos_1.inputValidationMiddleware, (req, res) => {
     let newVideos = {
         id: +(new Date()),
         title: req.body.title,
@@ -44,7 +44,7 @@ app.post('/', validatorVideos_1.videosValidator, validatorVideos_1.inputValidati
     res.status(201).send(newVideos);
 });
 //update videos
-app.put('/:id', validatorVideos_1.videosValidator, validatorVideos_1.inputValidationMiddleware, (req, res) => {
+app.put('/videos/:id', validatorVideos_1.videosValidator, validatorVideos_1.inputValidationMiddleware, (req, res) => {
     let isUpdated = db_1.vidosDB.find(v => v.id === +req.params.id);
     if (isUpdated) {
         isUpdated.title = req.body.title;
@@ -65,7 +65,7 @@ app.delete('/testing/all-data', (req, res) => {
     res.sendStatus(204);
 });
 //delete by ID
-app.delete('/:id', (req, res) => {
+app.delete('videos/:id', (req, res) => {
     for (let i = 0; i < db_1.vidosDB.length; i++) {
         if (db_1.vidosDB[i].id === +req.params.id) {
             db_1.vidosDB.splice(i, 1);
