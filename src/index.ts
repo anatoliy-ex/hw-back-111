@@ -2,7 +2,12 @@ import {Request, Response} from "express";
 import {vidosDB} from "./db/db";
 import bodyParser from "body-parser";
 import {videosTypes} from "./types/videosType";
-import {inputValidationMiddleware, videosValidator} from "./middlewares/validatorVideos";
+import {
+    createVideosValidator,
+    inputValidationMiddleware,
+    updateVideosValidator,
+    videosValidator
+} from "./middlewares/validatorVideos";
 
 
 const express = require('express')
@@ -35,7 +40,7 @@ app.get('/videos/:id', (req: Request, res: Response) =>
     }
 })
 //post video
-app.post('/videos', videosValidator, inputValidationMiddleware, (req: Request, res: Response) =>
+app.post('/videos', createVideosValidator, (req: Request, res: Response) =>
 {
     const now = new Date();
     const nextdate = new Date()
@@ -56,7 +61,7 @@ app.post('/videos', videosValidator, inputValidationMiddleware, (req: Request, r
     res.status(201).send(newVideos);
 })
 //update videos
-app.put('/videos/:id', videosValidator, inputValidationMiddleware, (req: Request, res: Response) =>
+app.put('/videos/:id', updateVideosValidator, (req: Request, res: Response) =>
 {
     let isUpdated = vidosDB.find(v => v.id === +req.params.id);
 
