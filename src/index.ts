@@ -31,7 +31,6 @@ app.get('/:id', (req: Request, res: Response) =>
         res.sendStatus(404);
     }
 })
-
 //post video
 app.post('/', videosValidator, inputValidationMiddleware, (req: Request, res: Response) =>
 {
