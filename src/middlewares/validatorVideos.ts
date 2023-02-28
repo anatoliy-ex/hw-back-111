@@ -3,15 +3,16 @@ import {  body,  validationResult } from 'express-validator';
 
 export const videosValidator =
     [
-        body('title').trim().isLength({ min: 0, max: 40}).isString,
+        body('title').isString().trim().isLength({ min: 0, max: 40}),
         body('author').isString().isLength({max: 20}),
-        body('availableResolutions').isString().isEmpty(),
-        body('minAgeRestriction').toInt().isLength({min: 1, max: 18}),
-        body('canBeDownloaded').isBoolean(),
+        body('availableResolutions').isArray(),
+        body('minAgeRestriction').toInt(),//custom validator,
+        body('canBeDownloaded').optional().isBoolean(),
     ];
 
 export const inputValidationMiddleware = (req: Request, res: Response, next: NextFunction) =>
 {
+    console.log("333")
     const errors = validationResult(req);
     if(!errors.isEmpty())
     {

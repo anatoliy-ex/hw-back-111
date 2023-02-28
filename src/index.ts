@@ -8,8 +8,8 @@ import {inputValidationMiddleware, videosValidator} from "./middlewares/validato
 const express = require('express')
 const app = express()
 const port = process.env.PORT || 666
-const parserMiddleware = bodyParser({})
-app.use(parserMiddleware)
+//const parserMiddleware = bodyParser.text({})
+//app.use(parserMiddleware)
 app.use(express.json());
 
 export const videosResolutions = [ "P144", "P240", "P360", "P480", "P720", "P1080"];
@@ -34,6 +34,8 @@ app.get('/videos/:id', (req: Request, res: Response) =>
 //post video
 app.post('/videos', videosValidator, inputValidationMiddleware, (req: Request, res: Response) =>
 {
+    console.log("111")
+
     let newVideos : videosTypes= {
         id : + (new Date()),
         title : req.body.title,

@@ -1,17 +1,13 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.videosResolutions = void 0;
 const db_1 = require("./db/db");
-const body_parser_1 = __importDefault(require("body-parser"));
 const validatorVideos_1 = require("./middlewares/validatorVideos");
 const express = require('express');
 const app = express();
 const port = process.env.PORT || 666;
-const parserMiddleware = (0, body_parser_1.default)({});
-app.use(parserMiddleware);
+//const parserMiddleware = bodyParser.text({})
+//app.use(parserMiddleware)
 app.use(express.json());
 exports.videosResolutions = ["P144", "P240", "P360", "P480", "P720", "P1080"];
 //get all
@@ -30,6 +26,7 @@ app.get('/videos/:id', (req, res) => {
 });
 //post video
 app.post('/videos', validatorVideos_1.videosValidator, validatorVideos_1.inputValidationMiddleware, (req, res) => {
+    console.log("111");
     let newVideos = {
         id: +(new Date()),
         title: req.body.title,

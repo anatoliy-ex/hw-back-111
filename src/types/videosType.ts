@@ -1,8 +1,9 @@
 type AvailableResolutions = string[];
+
 export type videosTypes =
     {
         id:	number,
-        title: string | null,
+        title: string,
         author: string,
         canBeDownloaded: boolean,
         minAgeRestriction: number | null,
