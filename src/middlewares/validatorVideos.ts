@@ -1,11 +1,13 @@
 import {NextFunction, Request, Response} from 'express';
 import {  body,  validationResult } from 'express-validator';
 
+
 export const videosValidator =
     [
         body('title').isString().trim().isLength({ min: 0, max: 40}),
         body('author').isString().isLength({max: 20}),
-        body('availableResolutions').isArray(),
+        body('availableResolutions').isArray().custom((value, { req }) =>
+            {return 18 > req.body.availableResolutions && req.body.availableResolutions > 1;}),
         body('minAgeRestriction').toInt(),//custom validator,
         body('canBeDownloaded').optional().isBoolean(),
     ];
