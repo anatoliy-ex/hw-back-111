@@ -12,6 +12,9 @@ const port = process.env.PORT || 666
 //app.use(parserMiddleware)
 app.use(express.json());
 
+
+
+
 export const videosResolutions = [ "P144", "P240", "P360", "P480", "P720", "P1080"];
 //get all
 app.get('/videos', (req: Request, res: Response) => {
@@ -34,7 +37,10 @@ app.get('/videos/:id', (req: Request, res: Response) =>
 //post video
 app.post('/videos', videosValidator, inputValidationMiddleware, (req: Request, res: Response) =>
 {
-    console.log("111")
+    const now = new Date();
+    const nextdate = new Date()
+    nextdate.setDate(now.getDate() + 1);
+
 
     let newVideos : videosTypes= {
         id : + (new Date()),
@@ -42,8 +48,8 @@ app.post('/videos', videosValidator, inputValidationMiddleware, (req: Request, r
         author : req.body.author,
         canBeDownloaded : req.body.canBeDownloaded || false,
         minAgeRestriction : req.body.minAgeRestriction,
-        createdAt : new Date().toISOString(),
-        publicationDate : new Date().toISOString() + 1,
+        createdAt : now.toISOString(),
+        publicationDate : nextdate.toISOString(),
         availableResolutions : req.body.availableResolutions || videosResolutions,
     };
     vidosDB.push(newVideos)

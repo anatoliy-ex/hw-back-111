@@ -26,15 +26,17 @@ app.get('/videos/:id', (req, res) => {
 });
 //post video
 app.post('/videos', validatorVideos_1.videosValidator, validatorVideos_1.inputValidationMiddleware, (req, res) => {
-    console.log("111");
+    const now = new Date();
+    const nextdate = new Date();
+    nextdate.setDate(now.getDate() + 1);
     let newVideos = {
         id: +(new Date()),
         title: req.body.title,
         author: req.body.author,
         canBeDownloaded: req.body.canBeDownloaded || false,
         minAgeRestriction: req.body.minAgeRestriction,
-        createdAt: new Date().toISOString(),
-        publicationDate: new Date().toISOString() + 1,
+        createdAt: now.toISOString(),
+        publicationDate: nextdate.toISOString(),
         availableResolutions: req.body.availableResolutions || exports.videosResolutions,
     };
     db_1.vidosDB.push(newVideos);
