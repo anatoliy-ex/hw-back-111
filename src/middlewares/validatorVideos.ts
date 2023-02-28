@@ -9,6 +9,8 @@ const canBeDownloadedValidation = body('canBeDownloaded').isBoolean()
 const availableResolutionsValidation = body('availableResolutions').isArray({max: videosResolutions.length}).custom(v => {
     return qualityCheck(v, videosResolutions)
 })
+const publicationDateValidation = body('publicationDate').isString().trim().notEmpty()
+
 
 const minAgeRestrictionValidation = body('minAgeRestriction')
     .custom(v => {
@@ -61,6 +63,7 @@ export const updateVideosValidator =
         availableResolutionsValidation,
         minAgeRestrictionValidation,
         canBeDownloadedValidation,
+        publicationDateValidation,
         inputValidationMiddleware
 
     ];
