@@ -4,9 +4,7 @@ import bodyParser from "body-parser";
 import {videosTypes} from "./types/videosType";
 import {
     createVideosValidator,
-    inputValidationMiddleware,
     updateVideosValidator,
-    videosValidator
 } from "./middlewares/validatorVideos";
 
 
