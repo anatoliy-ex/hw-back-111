@@ -7,8 +7,10 @@ export const videosValidator =
         body('title').isString().trim().isLength({ min: 0, max: 40}),
         body('author').isString().isLength({max: 20}),
         body('availableResolutions').isArray(),
-        body('minAgeRestriction').toInt(),
-        body('canBeDownloaded').optional().isBoolean(),
+        body('minAgeRestriction').toInt().custom(value =>
+        {
+            return value > 1 && value < 18;
+        })
     ];
 
 export const inputValidationMiddleware = (req: Request, res: Response, next: NextFunction) =>
