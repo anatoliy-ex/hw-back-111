@@ -36,7 +36,7 @@ app.get('/:id', (req: Request, res: Response) =>
 app.post('/', videosValidator, inputValidationMiddleware, (req: Request, res: Response) =>
 {
     let newVideos : videosTypes= {
-        id : + new Date(),
+        id : + (new Date()),
         title : req.body.title,
         author : req.body.author,
         canBeDownloaded : req.body.canBeDownloaded || false,
