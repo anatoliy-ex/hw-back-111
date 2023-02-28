@@ -9,7 +9,7 @@ const body_parser_1 = __importDefault(require("body-parser"));
 const validatorVideos_1 = require("./middlewares/validatorVideos");
 const express = require('express');
 const app = express();
-const port = 666;
+const port = process.env.PORT || 666;
 const parserMiddleware = (0, body_parser_1.default)({});
 app.use(parserMiddleware);
 app.use(express.json());

@@ -7,7 +7,7 @@ import {inputValidationMiddleware, videosValidator} from "./middlewares/validato
 
 const express = require('express')
 const app = express()
-const port = 666
+const port = process.env.PORT || 666
 const parserMiddleware = bodyParser({})
 app.use(parserMiddleware)
 app.use(express.json());
