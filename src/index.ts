@@ -9,6 +9,7 @@ const app = express()
 const port = 666
 const parserMiddleware = bodyParser({})
 app.use(parserMiddleware)
+app.use(express.json());
 
 const videosResolutions = [ "P144", "P240", "P360", "P480", "P720", "P1080"];
 //get all
@@ -35,6 +36,7 @@ app.post('/', (req: Request, res: Response) =>
         publicationDate : new Date().toISOString() + 1,
         availableResolutions : req.body.availableResolutions,
     };
+    vidosDB.push(newVideos)
     res.status(201).send(newVideos);
 })
 //update videos
