@@ -12,7 +12,7 @@ const parserMiddleware = bodyParser({})
 app.use(parserMiddleware)
 app.use(express.json());
 
-const videosResolutions = [ "P144", "P240", "P360", "P480", "P720", "P1080"];
+export const videosResolutions = [ "P144", "P240", "P360", "P480", "P720", "P1080"];
 //get all
 app.get('/', (req: Request, res: Response) => {
     res.send(vidosDB);
@@ -21,21 +21,29 @@ app.get('/', (req: Request, res: Response) => {
 app.get('/:id', (req: Request, res: Response) =>
 {
     let videos = vidosDB.find(v => v.id === +req.params.id);
-    res.status(200).send(videos);
+
+    if(videos)
+    {
+        res.status(200).send(videos);
+    }
+    else
+    {
+        res.sendStatus(404);
+    }
 })
 
 //post video
 app.post('/', videosValidator, inputValidationMiddleware, (req: Request, res: Response) =>
 {
-    let newVideos= {
+    let newVideos : videosTypes= {
         id : + new Date(),
         title : req.body.title,
         author : req.body.author,
-        canBeDownloaded : req.body.canBeDownloaded,
+        canBeDownloaded : req.body.canBeDownloaded || false,
         minAgeRestriction : req.body.minAgeRestriction,
         createdAt : new Date().toISOString(),
         publicationDate : new Date().toISOString() + 1,
-        availableResolutions : req.body.availableResolutions,
+        availableResolutions : req.body.availableResolutions || videosResolutions,
     };
     vidosDB.push(newVideos)
     res.status(201).send(newVideos);
@@ -51,7 +59,7 @@ app.put('/:id', videosValidator, inputValidationMiddleware, (req: Request, res: 
         isUpdated.author = req.body.author;
         isUpdated.canBeDownloaded = req.body.canBeDownloaded;
         isUpdated.minAgeRestriction = req.body.minAgeRestriction;
-        isUpdated.publicationDate = new Date().toISOString() + 1;
+        isUpdated.publicationDate = req.body.publicationDate;
         isUpdated.availableResolutions = req.body.availableResolutions;
         res.sendStatus(204);
     }
@@ -63,7 +71,8 @@ app.put('/:id', videosValidator, inputValidationMiddleware, (req: Request, res: 
 //delete all
 app.delete('/testing/all-data', (req: Request, res: Response) =>
 {
-   res.status(204).send(vidosDB)
+    vidosDB.splice(0, vidosDB.length);
+    res.sendStatus(204);
 })
 //delete by ID
 app.delete('/:id', (req: Request, res: Response) =>
