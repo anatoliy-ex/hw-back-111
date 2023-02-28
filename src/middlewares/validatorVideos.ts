@@ -12,11 +12,17 @@ export const videosValidator =
 
 export const inputValidationMiddleware = (req: Request, res: Response, next: NextFunction) =>
 {
-    console.log("333")
     const errors = validationResult(req);
+
     if(!errors.isEmpty())
     {
-        res.send(400).json({errors: errors.array()})
+        const errorsOccurred = errors.array({onlyFirstError: true}).map(e => {
+            return {
+                message: e.msg,
+                field: e.param
+            }
+        })
+        res.status(400).json({errorsMessages: errorsOccurred})
     }
     else
     {
