@@ -4,10 +4,10 @@ import {  body,  validationResult } from 'express-validator';
 export const videosValidator =
     [
 
-        body('title').isString().isLength({ min: 0, max: 40}),
+        body('title').isString().isLength({ min: 0, max: 40}) || null,
         body('author').isString().isLength({max: 20}),
         body('availableResolutions').isString().isEmpty(),
-        body('minAgeRestriction').toInt().isLength({min: 1, max: 18}),
+        body('minAgeRestriction').toInt().isLength({min: 1, max: 18}) || null,
         body('canBeDownloaded').isBoolean(),
     ];
 
