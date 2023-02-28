@@ -10,7 +10,6 @@ const availableResolutionsValidation = body('availableResolutions').isArray({max
     return qualityCheck(v, videosResolutions)
 })
 
-
 const minAgeRestrictionValidation = body('minAgeRestriction')
     .custom(v => {
         try {
