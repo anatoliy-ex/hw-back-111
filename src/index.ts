@@ -93,6 +93,7 @@ app.delete('/videos/:id', (req: Request, res: Response) =>
             return;
         }
     }
+    res.sendStatus(404);
 })
 
 
